@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -32,8 +30,8 @@ public class ReservasServiceImpl implements ReservasService {
 	@Override
 	public boolean reservar(ReservaAux reservaAux) {
 		HttpEntity<String> requestEntity = new HttpEntity<String>("");
-		ResponseEntity<String> response = template.exchange(urlVuelos + "/Vuelo/" + reservaAux.getVuelo() + "/" + reservaAux.getPersonas(), HttpMethod.PUT, requestEntity, String.class);
-		
+		ResponseEntity<String> response = template.exchange(urlVuelos + "/Vuelo/" + reservaAux.getVuelo() + "/" + reservaAux.getPersonas(),
+															HttpMethod.PUT, requestEntity, String.class);
 		if (response.getBody().equals("true")) {
 			reservasDao.save(new Reserva(reservaAux.getIdreserva(),
 										 reservaAux.getNombre(),
@@ -49,6 +47,4 @@ public class ReservasServiceImpl implements ReservasService {
 	public List<Reserva> reservas() {
 		return reservasDao.findAll();
 	}
-
-	
 }
