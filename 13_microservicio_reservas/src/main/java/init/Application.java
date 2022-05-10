@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(scanBasePackages = {"service", "controller", "init"})
+@SpringBootApplication(scanBasePackages = {"service", "controller", "init", "converters"})
 @EnableJpaRepositories(basePackages = {"dao"})
 @EntityScan(basePackages = {"model"})
 public class Application {
@@ -19,10 +19,6 @@ public class Application {
 
 	@Bean
 	public RestTemplate template() {
-		// Para proporcionar los credenciales de forma básica en Authorization utilizamos un interceptor
-		BasicAuthenticationInterceptor intercep = new BasicAuthenticationInterceptor("admin", "admin");
-		RestTemplate template = new RestTemplate();
-		template.getInterceptors().add(intercep);
-		return template;
+		return new RestTemplate();
 	}
 }

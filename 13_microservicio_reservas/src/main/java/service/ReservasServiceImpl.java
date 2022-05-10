@@ -3,15 +3,15 @@ package service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import converters.ConversorEntityDto;
 import dao.ReservasDao;
+import dtos.ReservaDto;
 import model.Reserva;
-import model.ReservaAux;
 
 @Service
 public class ReservasServiceImpl implements ReservasService {
@@ -21,6 +21,9 @@ public class ReservasServiceImpl implements ReservasService {
 	RestTemplate template;
 	String urlVuelos = "http://localhost:9000/vuelos";
 	
+	@Autowired
+	ConversorEntityDto conversor;
+	
 	public ReservasServiceImpl(@Autowired ReservasDao reservasDao, @Autowired RestTemplate template) {
 		super();
 		this.reservasDao = reservasDao;
@@ -28,16 +31,12 @@ public class ReservasServiceImpl implements ReservasService {
 	}
 
 	@Override
-	public boolean reservar(ReservaAux reservaAux) {
-		HttpEntity<String> requestEntity = new HttpEntity<String>("");
-		ResponseEntity<String> response = template.exchange(urlVuelos + "/Vuelo/" + reservaAux.getVuelo() + "/" + reservaAux.getPersonas(),
-															HttpMethod.PUT, requestEntity, String.class);
+	public boolean reservar(ReservaDto reservaDto) {
+//		HttpEntity<String> requestEntity = new HttpEntity<String>("");
+		ResponseEntity<String> response = template.exchange(urlVuelos + "/Vuelo/" + reservaDto.getVuelo() + "/" + reservaDto.getPersonas(),
+															HttpMethod.PUT, null, String.class);
 		if (response.getBody().equals("true")) {
-			reservasDao.save(new Reserva(reservaAux.getIdreserva(),
-										 reservaAux.getNombre(),
-										 reservaAux.getDni(),
-										 reservaAux.getHotel(),
-										 reservaAux.getVuelo()));
+			reservasDao.save(conversor.dtoToReserva(reservaDto));
 			return true;
 		}
 		return false;

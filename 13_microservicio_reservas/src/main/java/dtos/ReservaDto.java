@@ -1,4 +1,4 @@
-package model;
+package dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ReservaAux {
+public class ReservaDto {
 		private int idreserva;
 		private String nombre;
 		private String dni;
