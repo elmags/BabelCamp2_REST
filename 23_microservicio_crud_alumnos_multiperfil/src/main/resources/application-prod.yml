@@ -1,0 +1,21 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /crud
+spring:
+  application:
+    name: servicio-alumnos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ''
+    url: jdbc:mysql://178.23.40.15:3306/academia?serverTimezone=UTC		# 178.23.40.15 : IP inventada en la que por ejemplo se encuentra la bbdd
+    username: root
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

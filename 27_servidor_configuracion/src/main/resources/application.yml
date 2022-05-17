@@ -1,0 +1,17 @@
+server:
+  port: 8888
+spring:
+# Cuando los archivos se encuentran en local
+#  profiles:
+#    active:
+#    - native
+  cloud:
+    config:
+      server:
+      # Cuando los archivos se encuentran en la nube
+        git:
+          uri: https://github.com/elmags/servicios_config
+      # Cuando los archivos se encuentran en local
+#        native:
+#          search-locations:
+#          - file:///c:\Users\elma.gallardo\Desktop\BabelCamp\config
