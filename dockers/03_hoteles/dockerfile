@@ -1,0 +1,12 @@
+# Se crea el contenedor a partir de la imagen openjdk
+FROM openjdk
+# El archivo .jar lo guarda en servicios/alumnos.jar
+ADD microservicio_hoteles.jar servicios/hoteles.jar
+# Variables de entorno
+ENV hostconfig=192.168.1.69
+ENV hostdb=192.168.1.69
+ENV hostreal=192.168.1.69
+ENV hosteureka=192.168.1.69
+ENV portdb=3306
+# Lo ejecuta
+ENTRYPOINT java -jar servicios/hoteles.jar

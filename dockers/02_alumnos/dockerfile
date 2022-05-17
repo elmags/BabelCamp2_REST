@@ -1,0 +1,6 @@
+# Se crea el contenedor a partir de la imagen openjdk
+FROM openjdk
+# El archivo .jar lo guarda en servicios/alumnos.jar
+ADD crud_alumnos.jar servicios/alumnos2.jar
+# Lo ejecuta
+ENTRYPOINT java -jar servicios/alumnos2.jar
