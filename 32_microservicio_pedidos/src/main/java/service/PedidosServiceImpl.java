@@ -18,10 +18,10 @@ public class PedidosServiceImpl implements PedidosService {
 	PedidosDao pedidosDao;
 	
 	RestTemplate template;
-	String urlProductos = "http://localhost:9005/productos";
+	String urlProductos = "http://servicio-productos/productos";
 
 	
-	public PedidosServiceImpl(@Autowired PedidosDao pedidosDao, @Autowired RestTemplate template) {
+	public PedidosServiceImpl(@Autowired PedidosDao pedidosDao, RestTemplate template) {
 		super();
 		this.pedidosDao = pedidosDao;
 		this.template = template;

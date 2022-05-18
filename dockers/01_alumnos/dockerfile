@@ -1,6 +1,0 @@
-# Se crea el contenedor a partir de la imagen openjdk
-FROM openjdk
-# El archivo .jar lo guarda en servicios/alumnos.jar
-ADD microservicio_crud_alumnos.jar servicios/alumnos.jar
-# Lo ejecuta
-ENTRYPOINT java -jar servicios/alumnos.jar
